@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Наша главная страница</title>
+    <meta content="text/html" charset="UTF-8"/>
+</head>
+<body>
+<img th:src="@{/static/logo.jpg}" th:alt="Logo" th:style="'width:304px;height:228px'"/>
+<p th:text="'Hello, ' + ${name} + '!'"/>
+
+<a th:href="@{/search}" th:text="'Поиск службы доставки'"/>
+
+</body>
+</html>
