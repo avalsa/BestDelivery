@@ -4,7 +4,7 @@ package com.besteam.bestapp.form;
 import javax.validation.constraints.NotNull;
 
 public class SearchDeliveryForm {
-    //@NotNull
+    @NotNull
     private String from;
     //инждекс откуда куда - по возможности скачивать автоматческ икак на сайте почты рф
     //откуда город = подсказаьки,
@@ -15,13 +15,13 @@ public class SearchDeliveryForm {
     //если не получилось сделать подсказки, сделать чтобы и индекс вводился вручную
     //если не получилось добавить поля для полного адреса страна край район город
 
-    //@NotNull
+    @NotNull
     private String to;
-    //@NotNull
+    @NotNull
     private String date;
 
     private String way;
-    //@NotNull
+    @NotNull
     private String weight;
 
     private boolean filter;

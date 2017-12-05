@@ -3,12 +3,42 @@
 <head>
     <title>Наша главная страница</title>
     <meta content="text/html" charset="UTF-8"/>
+    <style type="text/css">
+        @import url("/static/StyleOfPages.css");
+    </style>
 </head>
-<body>
-<img th:src="@{/static/logo.jpg}" th:alt="Logo" th:style="'width:304px;height:228px'"/>
-<p th:text="'Hello, ' + ${name} + '!'"/>
+<body background="/static/Background.jpg">
 
-<a th:href="@{/search}" th:text="'Поиск службы доставки'"/>
+<!--Шапка страницы-->
+<div class="top">
+    <img th:src="@{/static/Top.png}" th:alt="Top" th:style="'width:750px;'"/>
+</div>
+
+<!--Главное меню-->
+<div style="text-align: center;"><table cborder="0" cellpadding="0" cellspacing="0" class="mainMenu">
+    <tbody><tr>
+        <td><a class="button" href="/">Главная</a></td>
+        <td><a class="button" href="/search">Поиск доставки</a></td>
+        <td><a class="button" href="/search">Отзывы</a></td>
+        <td><a class="button" href="/search">Зарегистрироваться</a></td>
+        <td><a class="button" href="/search">Войти</a></td>
+    </tr>
+    </tbody></table></div>
+
+<!--Содержимое страницы-->
+<div class="content-area" data-reactid=".0.1.0.2.1">
+    <div class="content-area__bg" style="opacity:1;" data-reactid=".0.1.0.2.1.0"></div>
+    <div class="content-area__inner" data-reactid=".0.1.0.2.1.1">
+        <section data-reactid=".0.1.0.2.1.1.0">
+            <center>
+                <img th:src="@{/static/logo.jpg}" th:alt="Logo" th:style="'width:304px;height:228px'"/>
+                <p th:text="'Hello, ' + ${name} + '!'" class="Heat"/>
+                <a th:href="@{/search}" th:text="'Поиск службы доставки'" class="button"/>
+            </center>
+        </section>
+    </div>
+</div>
+
 
 </body>
 </html>

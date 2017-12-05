@@ -1,0 +1,172 @@
+/*Шапка страницы */
+.top {
+    text-align: center; /* Выравнивание по центру */
+    position: relative;
+    z-index: 4;
+}
+
+/*Главное Меню*/
+.mainMenu{
+    position: relative;
+    z-index: 5;
+    -webkit-box-shadow: 0px 0px 62px 20px #1b0900;
+    -moz-box-shadow: 0px 0px 62px 20px #1b0900;
+    box-shadow: 0px 0px 62px 20px #1b0900;
+    margin: auto; /* Выравниваем таблицу по центру окна  */
+}
+
+/* Стиль кнопок */
+.button{text-decoration:none; text-align:center;
+    padding:11px 32px;
+    border:solid 1px #805d3f;
+
+    font:17px "Courier New", Courier, monospace;
+    font-weight:bold;
+    color:#805d3f;
+    background:#380900;
+    -webkit-box-shadow:inset 0px 0px 20px #000000,#000000,#000000;  -moz-box-shadow:inset 0px 0px 20px #000000;  box-shadow:inset 0px 0px 20px #000000;
+
+}.button:hover{
+     padding:11px 32px;
+     border:solid 1px #805d3f;
+
+     font:17px "Courier New", Courier, monospace;
+     font-weight:bold;
+     color:#805d3f;
+     background:#380900;
+     -webkit-box-shadow:inset 0px 0px 20px #000000,#000000;  -moz-box-shadow:inset 0px 0px 20px #000000;  box-shadow:inset 0px 0px 20px #000000;
+
+ }.button:active{
+      padding:11px 32px;
+      border:solid 1px #805d3f;
+
+      font:17px "Courier New", Courier, monospace;
+      font-weight:bold;
+      color:#5c4531;
+      background-color:#120300;
+      background-image: -moz-linear-gradient(top, #120300 0%, #380900 100%);
+      background-image: -webkit-linear-gradient(top, #120300 0%, #380900 100%);
+      background-image: -o-linear-gradient(top, #120300 0%, #380900 100%);
+      background-image: -ms-linear-gradient(top, #120300 0% ,#380900 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#380900', endColorstr='#380900',GradientType=0 );
+      background-image: linear-gradient(top, #120300 0% ,#380900 100%);
+      -webkit-box-shadow:inset 0px 0px 20px #000000; -moz-box-shadow:inset 0px 0px 20px #000000;  box-shadow:inset 0px 0px 20px #000000;
+  }
+
+/* Основное содержимое страницы*/
+.content-area__inner {
+    background: #ffffff;
+    padding: 20px 25px;
+    position: relative;
+    z-index: 3;
+    box-shadow: 0 0 10px 5px #1b0900;
+}
+
+.content-area__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    border-radius: 6px;
+}
+
+.content-area {
+    position: relative;
+    width: 750px;
+    margin: 0 auto;
+}
+
+/* Стиль заголовка */
+.Heat{
+    color:#380900;
+    font-size: 32px;
+}
+
+/* Стиль форм */
+.form {
+    /* Font-Size and Color */
+    color: #805d3f;
+    font-size: 17px;
+
+    /* Border */
+    border: 1px solid #67432b;
+    padding: 10px 10px;
+
+    /* Border-Radius */
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    /* Gradient */
+    background: #380900;
+
+    /* Box-Shadow */
+    -webkit-box-shadow:inset 0px 0px 39px 0px #000;
+    -moz-box-shadow:inset 0px 0px 39px 0px #000;
+    box-shadow:inset 0px 0px 39px 0px #000;
+
+    /* Text-Shadow */
+    text-shadow: 0px 0px 0px #000;
+
+}
+
+/* Расположение элементов в форме */
+table.searchTable{
+    margin: auto;
+}
+table.searchTable td, table.searchTable th {
+    padding: 10px 10px;
+}
+
+
+/* Стиль таблиц */
+table.resultTable {
+    font-family: "Times New Roman", Times, serif;
+    text-align: center;
+    border-collapse: collapse;
+    margin: auto;
+}
+table.resultTable td, table.resultTable th {
+    border: 1px solid #380900;
+    padding: 3px 10px;
+}
+table.resultTable tbody td {
+    font-size: 16px;
+    color: #380900;
+}
+table.resultTable thead {
+}
+table.resultTable thead th {
+    font-size: 22px;
+    font-weight: normal;
+    color: #380900;
+    text-align: center;
+}
+
+/* Стиль сообщений об ошибке */
+.error{
+    color: black;
+    font-size: 14px;
+    font-family: arial, sans-serif;
+
+    border: 1px solid #800000;
+    padding: 3px;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    background: #cd4242;
+    background: -moz-linear-gradient(top, #cd4242 0%, #fff 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cd4242), color-stop(100%, #fff));
+    background: -webkit-linear-gradient(top, #cd4242 0%, #fff 100%);
+    background: -o-linear-gradient(top, #cd4242 0%, #fff 100%);
+    background: -ms-linear-gradient(top, #cd4242 0%, #fff 100%);
+    background: linear-gradient(top, #cd4242 0%, #fff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#cd4242", endColorstr="#fff", GradientType=0);
+
+    -moz-opacity: 0.85;
+    opacity: 0.85;
+}

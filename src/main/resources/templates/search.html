@@ -3,16 +3,105 @@
 <head>
     <meta content="text/html" charset="UTF-8"/>
     <title>Поиск службы доставки</title>
+    <style type="text/css">
+        @import url("/static/StyleOfPages.css");
+    </style>
 </head>
-<body>
-<!--/*@thymesVar id="searchDeliveryForm" type="com.besteam.bestapp.form.SearchDeliveryForm"*/-->
-<form action="#" th:action="@{/search}" th:object="${searchDeliveryForm}" method="post">
-    <p>To: <input type="text" th:field="*{to}"/></p>
-    <p>From: <input type="text" th:field="*{from}"/></p>
-    <p>
-        <input type="submit" value="Submit"/>
-        <input type="reset" value="Reset"/>
-    </p>
-</form>
+<body background="/static/Background.jpg">
+
+<!--Шапка страницы-->
+<div class="top">
+    <img th:src="@{/static/Top.png}" th:alt="Top" th:style="'width:750px;'"/>
+</div>
+
+<!--Главное меню-->
+<div style="text-align: center;"><table cborder="0" cellpadding="0" cellspacing="0" class="mainMenu">
+    <tbody><tr>
+        <td><a class="button" href="/">Главная</a></td>
+        <td><a class="button" href="/search">Поиск доставки</a></td>
+        <td><a class="button" href="/search">Отзывы</a></td>
+        <td><a class="button" href="/search">Зарегистрироваться</a></td>
+        <td><a class="button" href="/search">Войти</a></td>
+    </tr>
+    </tbody></table></div>
+
+<!--Содержимое страницы-->
+<div class="content-area" data-reactid=".0.1.0.2.1">
+    <div class="content-area__bg" style="opacity:1;" data-reactid=".0.1.0.2.1.0"></div>
+    <div class="content-area__inner" data-reactid=".0.1.0.2.1.1">
+        <section data-reactid=".0.1.0.2.1.1.0">
+            <!--Форма поиска оптимальной доставки-->
+            <p class="Heat">Выберите критерии поиска</p>
+            <!--/*@thymesVar id="searchDeliveryForm" type="com.besteam.bestapp.form.SearchDeliveryForm"*/-->
+            <form action="#" th:action="@{/search}" th:object="${searchDeliveryForm}" method="post" class = "form" commandName="searchDeliveryForm">
+                <table class="searchTable">
+                    <tr>
+                        <td>Пункт отправления:
+                            <input type="text" th:field="*{from}"/>
+                            <span th:if="${#fields.hasErrors('from')}" th:errors="*{from}" class="error"></span>
+                        </td>
+                        <!--<td th:if="${#fields.hasErrors('from')}" th:errors="*{from}"> From Error</td>-->
+                        <td>Пункт прибытия:
+                            <input type="text" th:field="*{to}"/>
+                            <span th:if="${#fields.hasErrors('to')}" th:errors="*{to}" class="error"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Дата отправления:
+                            <input type="date" th:field="*{date}"/>
+                            <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="error"></span>
+                        </td>
+                        <td>Вес(в граммах):
+                            <input type="text" th:field="*{weight}"/>
+                            <span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" class="error"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Способ доставки:
+                            <select name="way" th:field="*{way}">
+                                <option th:value="0">Обычная</option>
+                                <option th:value="1">Экспресс</option>
+                                <option th:value="2">Курьерская</option>
+                            </select></td>
+                        <td>Учитывать рейтинг служб доставки  <input type="checkbox" th:field="*{filter}" value="true"/></td>
+                    </tr>
+                    <tr>
+                        <td>Найти доставку, оптимальную по
+                            <select name="filter" th:field="*{filter}">
+                                <option th:value="true">Цена</option>
+                                <option th:value="false">Время</option>
+                            </select></td>
+                        <td>Учитывать историю заказов <input type="checkbox" th:field="*{storyFilter}" value="true"/></td>
+                    </tr>
+                </table>
+                <center><input type="submit" value="Найти" class="button"/></center>
+            </form>
+
+            <!--Форма с результатами поиска-->
+            <p class="Heat">Результат поиска</p>
+            <!--/*@thymesVar id="searchResultForm" type="com.besteam.bestapp.form.SearchResultForm"*/-->
+            <table th:object="${searchResultForm}" class="resultTable">
+                <thead>
+                <tr>
+                    <th>Служба доставки</th>
+                    <th>Стоимость</th>
+                    <th>Ориентировочное время доставки</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><output th:field="*{delivery}"/></td>
+                    <td><output th:field="*{cost}"/></td>
+                    <td><output th:field="*{time}"/></td>
+                </tr>
+                </tbody></table>
+
+
+        </section>
+    </div>
+</div>
+
+
+
+
 </body>
 </html>
