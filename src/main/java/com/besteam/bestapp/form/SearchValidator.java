@@ -19,8 +19,12 @@ public class SearchValidator implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "from", "from.empty", "Введите город отправления.");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "to", "to.empty", "Введите город прибытия.");
         //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "weight", "weight.empty", "Введите вес посылки.");
-        if(!isInteger(form.getWeight())) errors.rejectValue("weight", "weight.notValid", "Поле должно содержать число.");
-        if(form.getDate().equals("дд.мм.гггг")) errors.rejectValue("date", "date.notValid", "Введите дату отправления.");
+        if(!isInteger(form.getWeight())) errors.rejectValue("weight", "weight.notValid", "Поле должно содержать целое число.");
+        if(!isInteger(form.getHeight())) errors.rejectValue("height", "height.notValid", "Поле высоты должно содержать целое число.");
+        if(!isInteger(form.getLength())) errors.rejectValue("length", "length.notValid", "Поле длинны должно содержать целое число.");
+        if(!isInteger(form.getWidth())) errors.rejectValue("width", "width.notValid", "Поле ширины должно содержать целое число.");
+        //if(form.getDate().equals("дд.мм.гггг")) errors.rejectValue("date", "date.notValid", "Введите дату отправления.");
+
     }
 
     private static boolean isInteger(String s) throws NumberFormatException {

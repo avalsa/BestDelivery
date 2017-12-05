@@ -7,7 +7,7 @@ public class SearchDeliveryForm {
     @NotNull
     private String from;
     //инждекс откуда куда - по возможности скачивать автоматческ икак на сайте почты рф
-    //откуда город = подсказаьки,
+    //откуда город = подсказаьки
     //куда город
     //вес граммы валидация
     //страна, регион, город - из почты россии стянуть полученеие данных
@@ -23,6 +23,12 @@ public class SearchDeliveryForm {
     private String way;
     @NotNull
     private String weight;
+    @NotNull
+    private String height;
+    @NotNull
+    private String length;
+    @NotNull
+    private String width;
 
     private boolean filter;
 
@@ -82,5 +88,29 @@ public class SearchDeliveryForm {
 
     public void setStoryFilter(boolean storyFilter) {
         this.storyFilter = storyFilter;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getLength() {
+        return length;
+    }
+
+    public void setLength(String length) {
+        this.length = length;
+    }
+
+    public String getWidth() {
+        return width;
+    }
+
+    public void setWidth(String width) {
+        this.width = width;
     }
 }

@@ -118,6 +118,7 @@ table.searchTable{
 }
 table.searchTable td, table.searchTable th {
     padding: 10px 10px;
+    width: 324px;
 }
 
 
@@ -170,3 +171,4 @@ table.resultTable thead th {
     -moz-opacity: 0.85;
     opacity: 0.85;
 }
+

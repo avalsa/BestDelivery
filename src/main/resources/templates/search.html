@@ -5,8 +5,22 @@
     <title>Поиск службы доставки</title>
     <style type="text/css">
         @import url("/static/StyleOfPages.css");
+        .inner_align {clear:both; text-align:right;line-height:25px;}
+        label {float:left;}
+
+
     </style>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script type="text/javascript">
+        ymaps.ready(init);
+        function init(){
+            var suggestView1 = new ymaps.SuggestView('from');
+            var suggestView2 = new ymaps.SuggestView('to');
+        }
+    </script>
+
 </head>
+
 <body background="/static/Background.jpg">
 
 <!--Шапка страницы-->
@@ -36,44 +50,82 @@
             <form action="#" th:action="@{/search}" th:object="${searchDeliveryForm}" method="post" class = "form" commandName="searchDeliveryForm">
                 <table class="searchTable">
                     <tr>
-                        <td>Пункт отправления:
-                            <input type="text" th:field="*{from}"/>
-                            <span th:if="${#fields.hasErrors('from')}" th:errors="*{from}" class="error"></span>
-                        </td>
-                        <!--<td th:if="${#fields.hasErrors('from')}" th:errors="*{from}"> From Error</td>-->
-                        <td>Пункт прибытия:
-                            <input type="text" th:field="*{to}"/>
-                            <span th:if="${#fields.hasErrors('to')}" th:errors="*{to}" class="error"></span>
+                        <td colspan="2" >
+                            <div class="inner_align">
+                                <label for="from">Пункт отправления:</label>
+                                <input type="text" id="from" th:field="*{from}" style="width: 470px;"/>
+                                <span th:if="${#fields.hasErrors('from')}" th:errors="*{from}" class="error"></span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>Дата отправления:
-                            <input type="date" th:field="*{date}"/>
-                            <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="error"></span>
+                        <td colspan="2">
+                            <div class="inner_align">
+                                <label for="to">Пункт прибытия:</label>
+                                <input type="text" id="to" th:field="*{to}" style="width: 470px;"/>
+                                <span th:if="${#fields.hasErrors('to')}" th:errors="*{to}" class="error"></span>
+                            </div>
                         </td>
-                        <td>Вес(в граммах):
-                            <input type="text" th:field="*{weight}"/>
-                            <span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" class="error"></span></td>
                     </tr>
                     <tr>
-                        <td>Способ доставки:
-                            <select name="way" th:field="*{way}">
-                                <option th:value="0">Обычная</option>
-                                <option th:value="1">Экспресс</option>
-                                <option th:value="2">Курьерская</option>
-                            </select></td>
+                        <td colspan="2">
+                            <div class="inner_align">
+                                <label>Размеры посылки (см):</label>
+                                высота
+                                <input type="text" id="height" th:field="*{height}" style="width: 85px"/>
+                                ширина
+                                <input type="text" id="width" th:field="*{width}" style="width: 85px"/>
+                                длинна
+                                <input type="text" id="length" th:field="*{length}" style="width: 85px"/>
+                                <span th:if="${#fields.hasErrors('height')}" th:errors="*{height}" class="error"></span>
+                                <span th:if="${#fields.hasErrors('width')}" th:errors="*{width}" class="error"></span>
+                                <span th:if="${#fields.hasErrors('length')}" th:errors="*{length}" class="error"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="inner_align">
+                                <label for="weight">Вес(в граммах):</label>
+                                <input type="text" id="weight" th:field="*{weight}" style="width: 160px"/>
+                                <span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" class="error"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="inner_align">
+                                <label for="date">Дата отправления:</label>
+                                <input type="date" id="date" th:field="*{date}" style="width: 164px"/>
+                                <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="error"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="inner_align">
+                                <label for="way">Способ доставки:</label>
+                                <select name="way" th:field="*{way}" id="way" style="width: 164px">
+                                    <option th:value="0">Обычная</option>
+                                    <option th:value="1">Экспресс</option>
+                                    <option th:value="2">Курьерская</option>
+                                </select>
+                            </div>
+                        </td>
                         <td>Учитывать рейтинг служб доставки  <input type="checkbox" th:field="*{filter}" value="true"/></td>
                     </tr>
                     <tr>
-                        <td>Найти доставку, оптимальную по
-                            <select name="filter" th:field="*{filter}">
+                        <td>
+                            <div class="inner_align">
+                                <label for="filter">Найти доставку, оптимальную по:</label>
+                                <select name="filter" th:field="*{filter}" id="filter">
                                 <option th:value="true">Цена</option>
                                 <option th:value="false">Время</option>
-                            </select></td>
+                                </select>
+                            </div>
+                        </td>
                         <td>Учитывать историю заказов <input type="checkbox" th:field="*{storyFilter}" value="true"/></td>
                     </tr>
                 </table>
-                <center><input type="submit" value="Найти" class="button"/></center>
+                <center><input type="submit" id="search" value="Найти" class="button"/></center>
             </form>
 
             <!--Форма с результатами поиска-->
