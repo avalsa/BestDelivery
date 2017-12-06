@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html" charset="UTF-8"/>
+    <title>Сервис отзывов</title>
+    <style type="text/css">
+        @import url("/static/StyleOfPages.css");
+    </style>
+
+</head>
+
+<body background="/static/Background.jpg">
+
+<!--Шапка страницы-->
+<div class="top">
+    <img th:src="@{/static/Top.png}" th:alt="Top" th:style="'width:750px;'"/>
+</div>
+
+<!--Главное меню-->
+<div style="text-align: center;"><table cborder="0" cellpadding="0" cellspacing="0" class="mainMenu">
+    <tbody><tr>
+        <td><a class="button" href="/">Главная</a></td>
+        <td><a class="button" href="/search">Поиск доставки</a></td>
+        <td><a class="button" href="/review">Отзывы</a></td>
+        <td><a class="button" href="/registration">Зарегистрироваться</a></td>
+        <td><a class="button" href="/auth">Войти</a></td>
+    </tr>
+    </tbody></table></div>
+
+<!--Содержимое страницы-->
+<div class="content-area" data-reactid=".0.1.0.2.1">
+    <div class="content-area__bg" style="opacity:1;" data-reactid=".0.1.0.2.1.0"></div>
+    <div class="content-area__inner" data-reactid=".0.1.0.2.1.1">
+        <section data-reactid=".0.1.0.2.1.1.0">
+            <p class="Heat">Службы доставки</p>
+            <ul style="list-style-type: circle">
+                <li><a href="#" class="usualText">Почта россии</a></li>
+                <li><a href="#" class="usualText">DPD</a></li>
+                <li><a href="#" class="usualText">IML</a></li>
+                <li><a href="#" class="usualText">Dostavista</a></li>
+            </ul>
+            <p> </p>
+            <p><a href="#" class="button">Добавить отзыв</a></p>
+        </section>
+    </div>
+</div>
+</body>
+</html>>
