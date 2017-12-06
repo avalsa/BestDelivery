@@ -5,19 +5,42 @@
     <title>Поиск службы доставки</title>
     <style type="text/css">
         @import url("/static/StyleOfPages.css");
+
         .inner_align {clear:both; text-align:right;line-height:25px;}
         label {float:left;}
-
-
     </style>
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         ymaps.ready(init);
         function init(){
             var suggestView1 = new ymaps.SuggestView('from');
             var suggestView2 = new ymaps.SuggestView('to');
+            }
+
+        function getCoordinate() {
+            /* var myGeocoder = ymaps.geocode(document.getElementById("from").value);
+            myGeocoder.then(
+                function (res) {
+                    var latitude =res.geoObjects.get(0).geometry.getCoordinates()[0];
+                    var longitude =res.geoObjects.get(0).geometry.getCoordinates()[1];
+                    var pageAdr="https://www.pochta.ru/portal-portlet/delegate/postoffice-api/method/offices.find.nearby.details?latitude="+latitude+"\u0026longitude="+longitude+"\u0026top=5\u0026currentDateTime=2017-12-5T21%3A19%3A36\u0026offset=0\u0026hidePrivate=true\u0026hideTemporaryClosed=true\u0026filter=POSTAL_SERVICES";
+                    //var pageAdr="http://kladr-api.ru/api.php?callback=jQuery18305511679767729147_1512561579670\u0026oneString=true\u0026withParent=true\u0026limit=10\u0026query="+document.valueOf('from')+"\u0026_=1512561780086";
+                   // $.getJSON(pageAdr, function(res) {
+                        alert(res);
+                    //$.get(pageAdr,
+                        //var parse=$(res.responseText),       //Организуем для Jquery доступ к тексту с кодом страницы.
+                        //    tab=parse.find("pre");  //ищем информацию по классу  .mainBG
+                       // $("body").append(tab);       //  alert('Координаты объекта :' + res.geoObjects.get(0).geometry.getCoordinates()[0]);//добавляем к странице заранее вычлененный tab
+                        //alert(tab);
+                },
+                function (err) {
+                    alert('Ошибка');
+                });*/
         }
     </script>
+
+
 
 </head>
 
@@ -33,45 +56,49 @@
     <tbody><tr>
         <td><a class="button" href="/">Главная</a></td>
         <td><a class="button" href="/search">Поиск доставки</a></td>
-        <td><a class="button" href="/search">Отзывы</a></td>
-        <td><a class="button" href="/search">Зарегистрироваться</a></td>
-        <td><a class="button" href="/search">Войти</a></td>
+        <td><a class="button" href="/review">Отзывы</a></td>
+        <td><a class="button" href="/registration">Зарегистрироваться</a></td>
+        <td><a class="button" href="/auth">Войти</a></td>
     </tr>
     </tbody></table></div>
 
-<!--Содержимое страницы-->
-<div class="content-area" data-reactid=".0.1.0.2.1">
-    <div class="content-area__bg" style="opacity:1;" data-reactid=".0.1.0.2.1.0"></div>
-    <div class="content-area__inner" data-reactid=".0.1.0.2.1.1">
-        <section data-reactid=".0.1.0.2.1.1.0">
-            <!--Форма поиска оптимальной доставки-->
-            <p class="Heat">Выберите критерии поиска</p>
-            <!--/*@thymesVar id="searchDeliveryForm" type="com.besteam.bestapp.form.SearchDeliveryForm"*/-->
-            <form action="#" th:action="@{/search}" th:object="${searchDeliveryForm}" method="post" class = "form" commandName="searchDeliveryForm">
-                <table class="searchTable">
-                    <tr>
-                        <td colspan="2" >
-                            <div class="inner_align">
-                                <label for="from">Пункт отправления:</label>
-                                <input type="text" id="from" th:field="*{from}" style="width: 470px;"/>
-                                <span th:if="${#fields.hasErrors('from')}" th:errors="*{from}" class="error"></span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <div class="inner_align">
-                                <label for="to">Пункт прибытия:</label>
-                                <input type="text" id="to" th:field="*{to}" style="width: 470px;"/>
-                                <span th:if="${#fields.hasErrors('to')}" th:errors="*{to}" class="error"></span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <div class="inner_align">
-                                <label>Размеры посылки (см):</label>
-                                высота
+                                <!--Содержимое страницы-->
+                                <div class="content-area" data-reactid=".0.1.0.2.1">
+                                    <div class="content-area__bg" style="opacity:1;" data-reactid=".0.1.0.2.1.0"></div>
+                                    <div class="content-area__inner" data-reactid=".0.1.0.2.1.1">
+                                        <section data-reactid=".0.1.0.2.1.1.0">
+                                            <!--Форма поиска оптимальной доставки-->
+                                            <p class="Heat">Выберите критерии поиска</p>
+                                            <!--/*@thymesVar id="searchDeliveryForm" type="com.besteam.bestapp.form.SearchDeliveryForm"*/-->
+                                            <form action="#" th:action="@{/search}" th:object="${searchDeliveryForm}" method="post" class = "form" commandName="searchDeliveryForm">
+                                                <table class="searchTable">
+                                                    <tr>
+                                                        <td colspan="2" >
+                                                            <div class="inner_align">
+                                                                <label for="from">Пункт отправления:</label>
+                                                                индекс <input type="text" id="indexFrom" th:field="*{indexFrom}" style="width: 85px;" maxlength="6"/>
+                                                                адрес <input type="text" id="from" th:field="*{from}" style="width: 300px;"/>
+                                                                <span th:if="${#fields.hasErrors('indexFrom')}" th:errors="*{indexFrom}" class="error"></span>
+                                                                <span th:if="${#fields.hasErrors('from')}" th:errors="*{from}" class="error"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <div class="inner_align">
+                                                                <label for="to">Пункт прибытия:</label>
+                                                                индекс <input type="text" id="indexTo" th:field="*{indexTo}" style="width: 85px;" maxlength="6"/>
+                                                                адрес <input type="text" id="to" th:field="*{to}" style="width: 300px;"/>
+                                                                <span th:if="${#fields.hasErrors('indexTo')}" th:errors="*{indexTo}" class="error"></span>
+                                                                <span th:if="${#fields.hasErrors('to')}" th:errors="*{to}" class="error"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <div class="inner_align">
+                                                                <label>Размеры посылки (см):</label>
+                                                                высота
                                 <input type="text" id="height" th:field="*{height}" style="width: 85px"/>
                                 ширина
                                 <input type="text" id="width" th:field="*{width}" style="width: 85px"/>
@@ -125,7 +152,7 @@
                         <td>Учитывать историю заказов <input type="checkbox" th:field="*{storyFilter}" value="true"/></td>
                     </tr>
                 </table>
-                <center><input type="submit" id="search" value="Найти" class="button"/></center>
+                <div style="text-align: center;"><input type="submit" id="searchButton" value="Найти" class="button"/></div>
             </form>
 
             <!--Форма с результатами поиска-->
@@ -146,7 +173,6 @@
                     <td><output th:field="*{time}"/></td>
                 </tr>
                 </tbody></table>
-
 
         </section>
     </div>

@@ -3,7 +3,7 @@ package com.besteam.bestapp.controller;
 import com.besteam.bestapp.form.SearchDeliveryForm;
 
 import com.besteam.bestapp.form.SearchResultForm;
-import com.besteam.bestapp.form.SearchValidator;
+import com.besteam.bestapp.form.validators.SearchValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,8 +21,6 @@ public class SearchDeliveryController {
     @Autowired
     private SearchValidator searchFormValidator;
 
-    //методы для обработки ошибок
-
     @RequestMapping(value = "search", method = RequestMethod.POST)
     public String searchDelivery(@ModelAttribute("searchDeliveryForm") @Valid SearchDeliveryForm form, Model model, BindingResult bindingResult) {
         searchFormValidator.validate(form,bindingResult);
@@ -37,18 +35,5 @@ public class SearchDeliveryController {
     public ModelAndView showForm() {
         return new ModelAndView("search", "searchDeliveryForm", new SearchDeliveryForm());
     }
-
-    public boolean isFrom(String from){
-        return !from.isEmpty();
-    }
-
-    public boolean isTo(String to){
-        return !to.isEmpty();
-    }
-
-    public boolean isWeight(String weight){
-        return !weight.isEmpty();
-    }
-
 
 }

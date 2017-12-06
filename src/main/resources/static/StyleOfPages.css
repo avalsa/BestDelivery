@@ -84,6 +84,11 @@
     font-size: 32px;
 }
 
+.usualText{
+    color:#380900;
+    font-size: 17px;
+}
+
 /* Стиль форм */
 .form {
     /* Font-Size and Color */
@@ -93,6 +98,7 @@
     /* Border */
     border: 1px solid #67432b;
     padding: 10px 10px;
+    margin: auto;
 
     /* Border-Radius */
     -webkit-border-radius: 5px;

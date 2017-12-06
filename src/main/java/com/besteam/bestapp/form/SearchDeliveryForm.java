@@ -4,19 +4,18 @@ package com.besteam.bestapp.form;
 import javax.validation.constraints.NotNull;
 
 public class SearchDeliveryForm {
+
     @NotNull
+    private String indexFrom;
+
     private String from;
-    //инждекс откуда куда - по возможности скачивать автоматческ икак на сайте почты рф
-    //откуда город = подсказаьки
-    //куда город
-    //вес граммы валидация
     //страна, регион, город - из почты россии стянуть полученеие данных
-    //добавить валидацию
-    //если не получилось сделать подсказки, сделать чтобы и индекс вводился вручную
     //если не получилось добавить поля для полного адреса страна край район город
 
     @NotNull
     private String to;
+
+    private String indexTo;
     @NotNull
     private String date;
 
@@ -112,5 +111,21 @@ public class SearchDeliveryForm {
 
     public void setWidth(String width) {
         this.width = width;
+    }
+
+    public String getIndexFrom() {
+        return indexFrom;
+    }
+
+    public void setIndexFrom(String indexFrom) {
+        this.indexFrom = indexFrom;
+    }
+
+    public String getIndexTo() {
+        return indexTo;
+    }
+
+    public void setIndexTo(String indexTo) {
+        this.indexTo = indexTo;
     }
 }
