@@ -24,7 +24,7 @@ public class BoxberryDeliverySearch implements DeliverySearch {
 
     @Override
     public SearchDeliveryResult doRequest(SearchDeliveryForm form) {
-        return new BoxberryRequest().doRequest(form.getFrom(), form.getTo(), Integer.parseInt(form.getHeight()), Integer.parseInt(form.getWidth()), Integer.parseInt(form.getLength()));
+        return new BoxberryRequest().doRequest(form.getFromCity(), form.getToCity(), Integer.parseInt(form.getHeight()), Integer.parseInt(form.getWidth()), Integer.parseInt(form.getLength()));
     }
 
     public static class BoxberryRequest {

@@ -36,4 +36,8 @@ public class RegistrationValidator implements Validator{
             return false;
         }
     }
+
+    private static boolean isFreeLogin(String login){
+        return true;
+    }
 }

@@ -33,6 +33,7 @@ public class SearchDeliveryForm {
 
     private boolean storyFilter;
 
+
     public String getTo() {
         return to;
     }
@@ -65,7 +66,7 @@ public class SearchDeliveryForm {
         this.way = way;
     }
 
-    public boolean isFilter() {
+    public boolean getFilter() {
         return filter;
     }
 
@@ -127,5 +128,21 @@ public class SearchDeliveryForm {
 
     public void setIndexTo(String indexTo) {
         this.indexTo = indexTo;
+    }
+
+    public String getFromCity(){
+        return from.split(", ")[1];
+    }
+
+    public String getFromCountry(){
+        return from.split(", ")[0];
+    }
+
+    public String getToCity(){
+        return to.split(", ")[1];
+    }
+
+    public String getToCountry(){
+        return to.split(", ")[0];
     }
 }

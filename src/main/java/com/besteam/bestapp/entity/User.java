@@ -16,6 +16,22 @@ public class User {
             nullable = false, length = 60)
     private String password;
 
+    @Column(name = "firstName",
+            nullable = false, length = 60)
+    private String firstName;
+
+    @Column(name = "middleName",
+            nullable = true, length = 60)
+    private String middleName;
+
+    @Column(name = "lastName",
+            nullable = true, length = 60)
+    private String lastName;
+
+    @Column(name = "email",
+            nullable = false, length = 100)
+    private String email;
+
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
@@ -71,4 +87,35 @@ public class User {
         this.userRole = userRole;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

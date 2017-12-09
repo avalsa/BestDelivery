@@ -18,8 +18,11 @@ import java.util.Arrays;
 public class PostRfSearch implements DeliverySearch {
     @Override
     public SearchDeliveryResult doRequest(SearchDeliveryForm form) {
-       // return new PostRequest(new Location(), new Location(), (int) (Integer.parseInt(form.getWeight()) * 0.7), (int) (Integer.parseInt(form.getWeight()) * 1.3), ....).doRequest();
-    return null;
+        try {
+            return new PostRequest(new Location(form.getFromCountry(),"",form.getFromCity(),""), new Location(form.getToCountry(),"",form.getToCity(),""), (int) (Integer.parseInt(form.getWeight()) * 0.7), (int) (Integer.parseInt(form.getWeight()) * 1.3), Integer.parseInt(form.getIndexFrom()), Integer.parseInt(form.getIndexTo())).doRequest();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static class PostRequest {

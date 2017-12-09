@@ -1,5 +1,6 @@
 package com.besteam.bestapp.controller;
 
+import com.besteam.bestapp.entity.User;
 import com.besteam.bestapp.form.*;
 import com.besteam.bestapp.form.validators.RegistrationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +44,6 @@ public class UserController {
     public ModelAndView showAuthForm() {
         return new ModelAndView("auth", "authForm", new AuthForm());
     }
+
+
 }

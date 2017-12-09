@@ -21,9 +21,9 @@ import java.util.StringJoiner;
 public class ImlDeliverySearch implements DeliverySearch {
     @Override
     public SearchDeliveryResult doRequest(SearchDeliveryForm form) {
-        //magic
-        //and
-        return new ImlRequest().doRequest(form.getFrom(), form.getTo(), Integer.parseInt(form.getWeight()));
+        Integer weight = Integer.parseInt(form.getWeight());
+        weight = Double.valueOf(Math.ceil(weight * 1. / 1000)).intValue();
+        return new ImlRequest().doRequest(form.getFromCity().toUpperCase(), form.getToCity().toUpperCase(), weight);
     }
 
     public class ImlRequest {
