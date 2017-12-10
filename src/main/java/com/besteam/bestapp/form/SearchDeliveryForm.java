@@ -131,18 +131,18 @@ public class SearchDeliveryForm {
     }
 
     public String getFromCity(){
-        return from.split(", ")[1];
+        return from.split(", ")[1].trim();
     }
 
     public String getFromCountry(){
-        return from.split(", ")[0];
+        return from.split(", ")[0].trim();
     }
 
     public String getToCity(){
-        return to.split(", ")[1];
+        return to.split(", ")[1].trim();
     }
 
     public String getToCountry(){
-        return to.split(", ")[0];
+        return to.split(", ")[0].trim();
     }
 }

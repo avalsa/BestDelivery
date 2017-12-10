@@ -13,8 +13,8 @@ public class SearchDeliveryResult {
     private Duration minTime;
     private Duration maxTime;
 
-    public SearchDeliveryResult(Delivery d) {
-
+    public SearchDeliveryResult(Delivery delivery) {
+        this.delivery = delivery;
     }
 
 

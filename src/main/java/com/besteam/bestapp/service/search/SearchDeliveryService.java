@@ -18,6 +18,7 @@ public class SearchDeliveryService {
     static {
         searchEngines.add(new ImlDeliverySearch());
         searchEngines.add(new PostRfSearch());
+        searchEngines.add(new BoxberryDeliverySearch());
     }
 
     public SearchDeliveryResults doRequest(SearchDeliveryForm form) {
