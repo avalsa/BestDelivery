@@ -1,6 +1,7 @@
 package com.besteam.bestapp.form;
 
 import com.besteam.bestapp.entity.Delivery;
+import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import java.time.Duration;
 
@@ -11,9 +12,9 @@ public class SearchResultForm {
     String time;
 
     public SearchResultForm(Delivery delivery, Integer cost, Duration time) {
-        this.delivery = delivery != null ? delivery.toString() : null;
-        this.cost = cost != null ? cost.toString() : null;
-        this.time = time != null ? time.toString() : null;
+        this.delivery = delivery != null ? delivery.toString() : "N/A";
+        this.cost = cost != null ? cost.toString() : "N/A";
+        this.time = time != null ? DurationFormatUtils.formatDuration(time.toMillis(), "d' дн. 'H' ч.'") : "N/A";
     }
 
     public String getDelivery() {

@@ -53,19 +53,20 @@ public class BoxberryDeliverySearch implements DeliverySearch {
             postRequest.setEntity(input);
             try (CloseableHttpResponse response = httpClient.execute(postRequest)) {
                 String res =  EntityUtils.toString(response.getEntity());
-                return parseRespone(res);
+                return parseResponse(res);
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
         }
 
-        private SearchDeliveryResult parseRespone(String res) {
+        private SearchDeliveryResult parseResponse(String res) {
             JSONObject response = new JSONArray(res).getJSONObject(0);
             SearchDeliveryResult r = new SearchDeliveryResult(Delivery.Boxberry);
             r.setCost(response.getInt("priceBase"));
             r.setMinTime(Duration.ofDays(response.getInt("DeliveryPeriod")));
             r.setMaxTime(Duration.ofDays(response.getInt("DeliveryPeriod") + 1));
+            r.setDeliveryTime(r.getMinTime());
             return r;
         }
 

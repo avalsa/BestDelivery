@@ -1,6 +1,5 @@
 package com.besteam.bestapp.service.search;
 
-import com.besteam.bestapp.entity.Delivery;
 import com.besteam.bestapp.form.SearchDeliveryForm;
 
 import java.util.ArrayList;
@@ -10,8 +9,8 @@ import java.util.concurrent.*;
 
 public class SearchDeliveryService {
     private static final int LOADERS_THREAD_CNT = 20;
-    private static final int WAIT_TIME = 10; //sec
-    private static final List<DeliverySearch> searchEngines = new ArrayList<>() ;
+    private static final int MAX_WAIT_TIME = 10; //sec
+    private static final List<DeliverySearch> searchEngines = new ArrayList<>();
     private static final ExecutorService executor = Executors.newFixedThreadPool(LOADERS_THREAD_CNT);
 
 
@@ -28,7 +27,7 @@ public class SearchDeliveryService {
             tasks.add(new TaskSearch(searchEngine, form));
         }
         try {
-            List<Future<SearchDeliveryResult>> futures = executor.invokeAll(tasks, WAIT_TIME, TimeUnit.SECONDS);
+            List<Future<SearchDeliveryResult>> futures = executor.invokeAll(tasks, MAX_WAIT_TIME, TimeUnit.SECONDS);
             SearchDeliveryResults results = new SearchDeliveryResults();
             futures
                     .parallelStream()
@@ -41,6 +40,20 @@ public class SearchDeliveryService {
                         }
                     })
                     .filter(Objects::nonNull)
+                    .sorted((o1, o2) -> {
+                        if (o2 == o1) return 0;
+                        if (o1 == null) return -1;
+                        if (o2 == null) return 1;
+                        if (form.getFilter()) {
+                            if (o1.getCost() == null) return -1;
+                            if (o2.getCost() == null) return 1;
+                            return o1.getCost() - o2.getCost();
+                        } else {//�����
+                            if (o1.getDeliveryTime() == null) return -1;
+                            if (o2.getDeliveryTime() == null) return 1;
+                            return o1.getDeliveryTime().compareTo(o2.getDeliveryTime());
+                        }
+                    })
                     .forEach(results::addResult);
             return results;
         } catch (Exception e) {

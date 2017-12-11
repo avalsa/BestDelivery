@@ -157,21 +157,21 @@
 
             <!--Форма с результатами поиска-->
             <p class="Heat">Результат поиска</p>
-            <!--/*@thymesVar id="searchResultForm" type="com.besteam.bestapp.form.SearchResultForm"*/-->
-            <table th:object="${searchResultForm}" class="resultTable">
+            <table class="resultTable">
                 <thead>
                 <tr>
                     <th>Служба доставки</th>
                     <th>Стоимость</th>
                     <th>Ориентировочное время доставки</th>
-                    <th th:text="'Hello, ' + ${cost} + '!'" class="Heat"/>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td><output th:field="*{delivery}"/></td>
-                    <td><output th:field="*{cost}"/></td>
-                    <td><output th:field="*{time}"/></td>
+                <!--/*@thymesVar id="results" type="java.util.List"*/-->
+                <tr th:each="result : ${results}">
+                    <!--/*@thymesVar id="result" type="com.besteam.bestapp.form.SearchResultForm"*/-->
+                    <td th:text="${result.delivery}"/>
+                    <th th:text="${result.cost}"/>
+                    <td th:text="${result.time}"/>
                 </tr>
                 </tbody></table>
 

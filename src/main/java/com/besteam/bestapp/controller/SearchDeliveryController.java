@@ -33,9 +33,7 @@ public class SearchDeliveryController {
         SearchDeliveryService searchDeliveryService = new SearchDeliveryService();
         SearchDeliveryResults searchDeliveryResults = searchDeliveryService.doRequest(form);
         if (searchDeliveryResults.getResults().isEmpty()) return "search";
-        SearchDeliveryResult r = getBestResult(searchDeliveryResults, form);
-        //model.addAttribute("name", form.getFrom());
-        model.addAttribute("cost", r.getCost());//new SearchResultForm(r.getDelivery(), r.getCost(), r.getDeliveryTime()));
+        model.addAttribute("results", searchDeliveryResults.toForm());
         return "search";
     }
 
