@@ -11,9 +11,9 @@ public class SearchResultForm {
     String time;
 
     public SearchResultForm(Delivery delivery, Integer cost, Duration time) {
-        this.delivery = delivery.toString();
-        this.cost = cost.toString();
-        this.time = time.toString();
+        this.delivery = delivery != null ? delivery.toString() : null;
+        this.cost = cost != null ? cost.toString() : null;
+        this.time = time != null ? time.toString() : null;
     }
 
     public String getDelivery() {

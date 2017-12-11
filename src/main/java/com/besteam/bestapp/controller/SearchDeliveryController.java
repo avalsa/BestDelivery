@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
-import javax.naming.directory.SearchResult;
 import javax.validation.Valid;
 
 import org.springframework.validation.BindingResult;
@@ -36,8 +34,8 @@ public class SearchDeliveryController {
         SearchDeliveryResults searchDeliveryResults = searchDeliveryService.doRequest(form);
         if (searchDeliveryResults.getResults().isEmpty()) return "search";
         SearchDeliveryResult r = getBestResult(searchDeliveryResults, form);
-        model.addAttribute("name", form.getFrom());
-        model.addAttribute("searchResultForm", new SearchResultForm(r.getDelivery(), r.getCost(), r.getDeliveryTime()));
+        //model.addAttribute("name", form.getFrom());
+        model.addAttribute("cost", r.getCost());//new SearchResultForm(r.getDelivery(), r.getCost(), r.getDeliveryTime()));
         return "search";
     }
 
@@ -51,6 +49,9 @@ public class SearchDeliveryController {
         if (form.getFilter()) {
             //цена
             for (SearchDeliveryResult searchDeliveryResult : searchDeliveryResults.getResults()) {
+                if (searchDeliveryResult.getCost() == null || bestResult.getCost() == null) {
+                    continue;
+                }
                 if (searchDeliveryResult.getCost() < bestResult.getCost()) {
                     bestResult = searchDeliveryResult;
                 }
@@ -58,6 +59,9 @@ public class SearchDeliveryController {
         } else {
             //время
             for (SearchDeliveryResult searchDeliveryResult : searchDeliveryResults.getResults()) {
+                if (searchDeliveryResult.getDeliveryTime() == null || bestResult.getDeliveryTime() == null) {
+                    continue;
+                }
                 if (searchDeliveryResult.getDeliveryTime().compareTo(bestResult.getDeliveryTime()) < 0) {
                     bestResult = searchDeliveryResult;
                 }
