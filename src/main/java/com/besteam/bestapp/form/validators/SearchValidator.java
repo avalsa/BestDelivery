@@ -18,11 +18,7 @@ public class SearchValidator implements Validator{
         SearchDeliveryForm form = (SearchDeliveryForm) command;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "from", "from.empty", "Введите город отправления.");
-        //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "indexFrom", "indexFrom.empty", "Индекс не введен");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "to", "to.empty", "Введите город прибытия.");
-        //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "indexTo", "indexTo.empty", "Индекс не введен");
-        if(!isInteger(form.getIndexFrom())) errors.rejectValue("indexFrom", "indexFrom.notValid", "Неверный индекс.");
-        if(!isInteger(form.getIndexTo())) errors.rejectValue("indexTo", "indexTo.notValid", "Неверный индекс.");
         if(!isInteger(form.getWeight())) errors.rejectValue("weight", "weight.notValid", "Поле должно содержать целое число.");
         if(!isInteger(form.getHeight())) errors.rejectValue("height", "height.notValid", "Поле высоты должно содержать целое число.");
         if(!isInteger(form.getLength())) errors.rejectValue("length", "length.notValid", "Поле длинны должно содержать целое число.");

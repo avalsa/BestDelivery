@@ -5,17 +5,9 @@ import javax.validation.constraints.NotNull;
 
 public class SearchDeliveryForm {
 
-    @NotNull
-    private String indexFrom;
-
     private String from;
-    //страна, регион, город - из почты россии стянуть полученеие данных
-    //если не получилось добавить поля для полного адреса страна край район город
-
     @NotNull
     private String to;
-
-    private String indexTo;
     @NotNull
     private String date;
 
@@ -112,22 +104,6 @@ public class SearchDeliveryForm {
 
     public void setWidth(String width) {
         this.width = width;
-    }
-
-    public String getIndexFrom() {
-        return indexFrom;
-    }
-
-    public void setIndexFrom(String indexFrom) {
-        this.indexFrom = indexFrom;
-    }
-
-    public String getIndexTo() {
-        return indexTo;
-    }
-
-    public void setIndexTo(String indexTo) {
-        this.indexTo = indexTo;
     }
 
     public String getFromCity(){

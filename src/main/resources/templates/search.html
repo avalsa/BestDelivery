@@ -76,9 +76,7 @@
                                                         <td colspan="2" >
                                                             <div class="inner_align">
                                                                 <label for="from">Пункт отправления:</label>
-                                                                индекс <input type="text" id="indexFrom" th:field="*{indexFrom}" style="width: 85px;" maxlength="6"/>
                                                                 адрес <input type="text" id="from" th:field="*{from}" style="width: 300px;"/>
-                                                                <span th:if="${#fields.hasErrors('indexFrom')}" th:errors="*{indexFrom}" class="error"></span>
                                                                 <span th:if="${#fields.hasErrors('from')}" th:errors="*{from}" class="error"></span>
                                                             </div>
                                                         </td>
@@ -87,9 +85,7 @@
                                                         <td colspan="2">
                                                             <div class="inner_align">
                                                                 <label for="to">Пункт прибытия:</label>
-                                                                индекс <input type="text" id="indexTo" th:field="*{indexTo}" style="width: 85px;" maxlength="6"/>
                                                                 адрес <input type="text" id="to" th:field="*{to}" style="width: 300px;"/>
-                                                                <span th:if="${#fields.hasErrors('indexTo')}" th:errors="*{indexTo}" class="error"></span>
                                                                 <span th:if="${#fields.hasErrors('to')}" th:errors="*{to}" class="error"></span>
                                                             </div>
                                                         </td>
