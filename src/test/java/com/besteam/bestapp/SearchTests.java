@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.geom.Point2D;
+
 import static org.junit.Assert.assertNotNull;
 
 public class SearchTests {
@@ -45,5 +47,23 @@ public class SearchTests {
     public void testAll() {
         SearchDeliveryResults r = new SearchDeliveryService().doRequest(form);
         r.getResults().forEach(Assert::assertNotNull);
+    }
+
+    @Test
+    public void testCityCoords() {
+        Point2D.Double p = new LocationInfoHelpersRequests().getCoordinatesByCityName("Москва");
+        assertNotNull(p);
+    }
+
+    @Test
+    public void testCityPostalCode() {
+        String code = new LocationInfoHelpersRequests().getPostalCodeByCoordinates(new Point2D.Double(37.622504, 55.753215));
+        assertNotNull(code);
+    }
+
+    @Test
+    public void testCityPostalCode2() {
+        String code = new LocationInfoHelpersRequests().getPostalCodeByCityName("Москва");
+        assertNotNull(code);
     }
 }

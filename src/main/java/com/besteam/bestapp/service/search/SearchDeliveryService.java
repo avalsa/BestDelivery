@@ -44,11 +44,11 @@ public class SearchDeliveryService {
                         if (o2 == o1) return 0;
                         if (o1 == null) return -1;
                         if (o2 == null) return 1;
-                        if (form.getFilter()) {
+                        if (form.getFilter()) { //цена
                             if (o1.getCost() == null) return -1;
                             if (o2.getCost() == null) return 1;
                             return o1.getCost() - o2.getCost();
-                        } else {//�����
+                        } else {    //время
                             if (o1.getDeliveryTime() == null) return -1;
                             if (o2.getDeliveryTime() == null) return 1;
                             return o1.getDeliveryTime().compareTo(o2.getDeliveryTime());
