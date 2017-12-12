@@ -13,20 +13,21 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.nio.charset.Charset;
+import java.time.Duration;
 import java.util.Arrays;
 
 public class PostRfSearch implements DeliverySearch {
     @Override
     public SearchDeliveryResult doRequest(SearchDeliveryForm form) {
         try {
-            return new PostRequest(new Location(form.getFromCountry(),"",form.getFromCity(),""), new Location(form.getToCountry(),"",form.getToCity(),""),Integer.parseInt(form.getWeight())).doRequest();
+            return new PostRequest(new Location(form.getFromCountry(), "", form.getFromCity(), ""), new Location(form.getToCountry(), "", form.getToCity(), ""), Integer.parseInt(form.getWeight())).doRequest();
         } catch (Exception e) {
             return null;
         }
     }
 
     public static class PostRequest {
-    private static final String POST_RF_URL = "https://www.pochta.ru/portal-portlet/delegate/calculator/v1/api/delivery.time.cost.get";
+        private static final String POST_RF_URL = "https://www.pochta.ru/portal-portlet/delegate/calculator/v1/api/delivery.time.cost.get";
 
         private Location from;
         private Location to;
@@ -53,12 +54,11 @@ public class PostRfSearch implements DeliverySearch {
                             .put("postingType", "VPO")
                             .put("zipCodeFrom", zipFrom)
                             .put("zipCodeTo", zipTo)
-                            .put("weightRange", new JSONArray(Arrays.asList((int)(weight * 0.7), (int)(weight * 1.3))))
+                            .put("weightRange", new JSONArray(Arrays.asList((int) (weight * 0.7), (int) (weight * 1.3))))
                             .put("wayForward", "EARTH")
                             .put("postingKind", "PARCEL")
                             .put("postingCategory", "ORDINARY")
-                            .put("parcelKind", "STANDARD")
-                    .put("productPageState", (Object)null));
+                            .put("parcelKind", "STANDARD"));
             return jsonObject.toString();
         }
 
@@ -66,8 +66,8 @@ public class PostRfSearch implements DeliverySearch {
             JSONObject response = new JSONObject(json).getJSONObject("data");
             SearchDeliveryResult r = new SearchDeliveryResult(Delivery.PostRf);
 
-//            JSONObject timeEntity = response.getJSONObject("timeEntity");
-//            r.setDeliveryTime(Duration.ofDays(timeEntity.getInt("minTime")));
+            JSONObject timeEntity = response.getJSONObject("timeEntity");
+            r.setDeliveryTime(Duration.ofDays(timeEntity.getInt("minTime")));
 
             JSONObject costEntity = response.getJSONObject("costEntity");
             r.setCost(costEntity.getInt("cost"));
@@ -81,7 +81,7 @@ public class PostRfSearch implements DeliverySearch {
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpPost postRequest = new HttpPost(POST_RF_URL);
 
-            StringEntity input = new StringEntity(this.toJson());
+            StringEntity input = new StringEntity(this.toJson(), Charset.forName("utf-8"));
             input.setContentType("application/json");
             postRequest.setEntity(input);
             CloseableHttpResponse response = httpClient.execute(postRequest);
