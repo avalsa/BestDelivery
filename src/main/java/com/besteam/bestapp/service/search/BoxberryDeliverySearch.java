@@ -64,9 +64,7 @@ public class BoxberryDeliverySearch implements DeliverySearch {
             JSONObject response = new JSONArray(res).getJSONObject(0);
             SearchDeliveryResult r = new SearchDeliveryResult(Delivery.Boxberry);
             r.setCost(response.getInt("priceBase"));
-            r.setMinTime(Duration.ofDays(response.getInt("DeliveryPeriod")));
-            r.setMaxTime(Duration.ofDays(response.getInt("DeliveryPeriod") + 1));
-            r.setDeliveryTime(r.getMinTime());
+            r.setDeliveryTime(Duration.ofDays(response.getInt("DeliveryPeriod")));
             return r;
         }
 

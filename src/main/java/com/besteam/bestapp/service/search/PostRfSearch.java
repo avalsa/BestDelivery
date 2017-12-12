@@ -9,17 +9,17 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.nio.charset.Charset;
-import java.time.Duration;
 import java.util.Arrays;
 
 public class PostRfSearch implements DeliverySearch {
     @Override
     public SearchDeliveryResult doRequest(SearchDeliveryForm form) {
         try {
-            return new PostRequest(new Location(form.getFromCountry(),"",form.getFromCity(),""), new Location(form.getToCountry(),"",form.getToCity(),""), (int) (Integer.parseInt(form.getWeight()) * 0.7), (int) (Integer.parseInt(form.getWeight()) * 1.3), Integer.parseInt(form.getIndexFrom()), Integer.parseInt(form.getIndexTo())).doRequest();
+            return new PostRequest(new Location(form.getFromCountry(),"",form.getFromCity(),""), new Location(form.getToCountry(),"",form.getToCity(),""),Integer.parseInt(form.getWeight())).doRequest();
         } catch (Exception e) {
             return null;
         }
@@ -30,18 +30,16 @@ public class PostRfSearch implements DeliverySearch {
 
         private Location from;
         private Location to;
-        private int weightMin;
-        private int weightMax;
-        private final int zipFrom;
-        private final int zipTo;
+        private int weight;
+        private String zipFrom;
+        private String zipTo;
 
-        public PostRequest(Location from, Location to, int weightMin, int weightMax, int zipFrom, int zipTo) {
+        public PostRequest(Location from, Location to, int weight) {
             this.from = from;
             this.to = to;
-            this.weightMin = weightMin;
-            this.weightMax = weightMax;
-            this.zipFrom = zipFrom;
-            this.zipTo = zipTo;
+            this.weight = weight;
+            zipFrom = new LocationInfoHelpersRequests().getPostalCodeByCityName(from.getCity());
+            zipTo = new LocationInfoHelpersRequests().getPostalCodeByCityName(to.getCity());
         }
 
         public String toJson() {
@@ -53,14 +51,14 @@ public class PostRfSearch implements DeliverySearch {
                             .put("sendingType", "PACKAGE"))
                     .put("costCalculationEntity", new JSONObject()
                             .put("postingType", "VPO")
-                            .put("zipCodeFrom", Integer.toString(zipFrom))
-                            .put("zipCodeTo", Integer.toString(zipTo))
-                            .put("weightRange", Arrays.asList(weightMin, weightMax))
+                            .put("zipCodeFrom", zipFrom)
+                            .put("zipCodeTo", zipTo)
+                            .put("weightRange", new JSONArray(Arrays.asList((int)(weight * 0.7), (int)(weight * 1.3))))
                             .put("wayForward", "EARTH")
                             .put("postingKind", "PARCEL")
                             .put("postingCategory", "ORDINARY")
-                            .put("parcelKind", "STANDARD"))
-                    .put("productPageState", (Object) null);
+                            .put("parcelKind", "STANDARD")
+                    .put("productPageState", (Object)null));
             return jsonObject.toString();
         }
 
@@ -68,9 +66,8 @@ public class PostRfSearch implements DeliverySearch {
             JSONObject response = new JSONObject(json).getJSONObject("data");
             SearchDeliveryResult r = new SearchDeliveryResult(Delivery.PostRf);
 
-            JSONObject timeEntity = response.getJSONObject("timeEntity");
-            r.setMinTime(Duration.ofDays(timeEntity.getInt("minTime")));
-            r.setMaxTime(Duration.ofDays(timeEntity.getInt("maxTime")));
+//            JSONObject timeEntity = response.getJSONObject("timeEntity");
+//            r.setDeliveryTime(Duration.ofDays(timeEntity.getInt("minTime")));
 
             JSONObject costEntity = response.getJSONObject("costEntity");
             r.setCost(costEntity.getInt("cost"));
@@ -156,8 +153,6 @@ public class PostRfSearch implements DeliverySearch {
     public static class JsonLocationObject extends JSONObject {
         public JsonLocationObject(Location l) {
             put("country", l.getCountry())
-                    .put("region", l.getRegion())
-                    .put("district", l.getDistinct())
                     .put("city", l.getCity());
         }
     }

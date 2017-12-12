@@ -17,8 +17,8 @@ public class SearchTests {
     @Before
     public void setUp() {
         form = new SearchDeliveryForm();
-        form.setFrom("Москва");
-        form.setTo("Краснодар");
+        form.setFrom("Россия, Москва");
+        form.setTo("Россия, Краснодар");
         form.setHeight("10");
         form.setWidth("10");
         form.setLength("2");

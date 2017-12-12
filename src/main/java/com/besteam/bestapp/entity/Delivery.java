@@ -6,5 +6,13 @@ public enum Delivery {
     PonyExpress,
     Cdek,
     Dhl,
-    Boxberry
+    Boxberry;
+
+    @Override
+    public String toString() {
+        if (this == PostRf) {
+            return "Почта России";
+        }
+        return super.toString();
+    }
 }

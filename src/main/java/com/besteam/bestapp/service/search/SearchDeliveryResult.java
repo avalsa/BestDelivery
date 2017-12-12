@@ -8,15 +8,11 @@ public class SearchDeliveryResult {
     private Delivery delivery;
     private Integer cost;
     private Duration deliveryTime;
-
     private boolean aviaAvailable;
-    private Duration minTime;
-    private Duration maxTime;
 
     public SearchDeliveryResult(Delivery delivery) {
         this.delivery = delivery;
     }
-
 
     public Delivery getDelivery() {
         return delivery;
@@ -40,22 +36,6 @@ public class SearchDeliveryResult {
 
     public void setDeliveryTime(Duration deliveryTime) {
         this.deliveryTime = deliveryTime;
-    }
-
-    public Duration getMinTime() {
-        return minTime;
-    }
-
-    public void setMinTime(Duration minTime) {
-        this.minTime = minTime;
-    }
-
-    public Duration getMaxTime() {
-        return maxTime;
-    }
-
-    public void setMaxTime(Duration maxTime) {
-        this.maxTime = maxTime;
     }
 
     public boolean isAviaAvailable() {
