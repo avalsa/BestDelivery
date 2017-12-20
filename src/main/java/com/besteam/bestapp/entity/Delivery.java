@@ -6,6 +6,7 @@ public enum Delivery {
     PonyExpress,
     Cdek,
     Dhl,
+    Dpd,
     Boxberry;
 
     @Override

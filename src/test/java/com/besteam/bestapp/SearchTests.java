@@ -44,6 +44,12 @@ public class SearchTests {
     }
 
     @Test
+    public void testDpdSearch() {
+        SearchDeliveryResult r = new DPDSearch().doRequest(form);
+        assertNotNull(r.getCost());
+    }
+
+    @Test
     public void testAll() {
         SearchDeliveryResults r = new SearchDeliveryService().doRequest(form);
         r.getResults().forEach(Assert::assertNotNull);

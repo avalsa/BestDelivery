@@ -64,9 +64,7 @@ public class ImlDeliverySearch implements DeliverySearch {
                 input.setContentType(ContentType.APPLICATION_FORM_URLENCODED.toString());
                 postRequest.setEntity(input);
                 postRequest.addHeader(HttpHeaders.ACCEPT, ContentType.APPLICATION_JSON.toString());
-                CloseableHttpResponse response = null;
-
-                response = httpClient.execute(postRequest);
+                CloseableHttpResponse response = httpClient.execute(postRequest);
                 HttpEntity entity = response.getEntity();
                 String postResponse = EntityUtils.toString(entity, Charset.forName("utf-8"));
                 EntityUtils.consume(entity);
